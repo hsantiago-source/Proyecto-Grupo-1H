@@ -21,7 +21,7 @@ public class Neurona {
     public Neurona(String id, Boolean activo, Neurona siguiente, ListaAdyacencia conexiones) {
         this.id = id;
         this.activo = activo;
-        this.siguiente = siguiente;
+        this.siguiente = null;
         this.conexiones = conexiones;
     }
 
