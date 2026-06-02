@@ -20,7 +20,7 @@ public class NodoHash {
         this.clave = clave;
         this.quimico = quimico;
         this.siguiente = siguiente;
-    }
+    }   
    
     public String getClave() {
         return clave;

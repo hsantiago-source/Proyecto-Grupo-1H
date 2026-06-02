@@ -13,8 +13,8 @@ public class TablaHashNeurotransmisores {
     private NodoHash[] tabla;
     private int capacidad;
 
-    public TablaHashNeurotransmisores(NodoHash[] tabla, int capacidad) {
-        this.tabla = tabla;
+    public TablaHashNeurotransmisores(int capacidad) {
+        this.tabla = new NodoHash[capacidad];
         this.capacidad = capacidad;
     }
 
