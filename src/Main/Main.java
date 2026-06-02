@@ -5,7 +5,7 @@
 package Main;
 
 /**
- *
+ * Main inicio del programa
  * @author hsantiago
  */
 public class Main {

@@ -4,6 +4,8 @@
  */
 package Entidades;
 
+import EDD.ListaAdyacencia;
+
 /**
  * Clase Neurona que es el nodo del grafo
  * @author hsantiago
@@ -14,15 +16,15 @@ public class Neurona {
     private String id;
     private Boolean activo;
     private Neurona siguiente;
+    private ListaAdyacencia conexiones;
 
-    //Constructor
-    public Neurona(String id, Boolean activo, Neurona siguiente) {
+    public Neurona(String id, Boolean activo, Neurona siguiente, ListaAdyacencia conexiones) {
         this.id = id;
         this.activo = activo;
-        this.siguiente = null;
+        this.siguiente = siguiente;
+        this.conexiones = conexiones;
     }
 
-    //Getters y setters 
     public String getId() {
         return id;
     }
@@ -46,6 +48,14 @@ public class Neurona {
     public void setSiguiente(Neurona siguiente) {
         this.siguiente = siguiente;
     }
-    
-    
+
+    public ListaAdyacencia getConexiones() {
+        return conexiones;
+    }
+
+    public void setConexiones(ListaAdyacencia conexiones) {
+        this.conexiones = conexiones;
+    }
+
+ 
 }

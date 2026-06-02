@@ -11,30 +11,18 @@ package Entidades;
 public class Sinapsis {
     
     //Campos de la clase
-    private Neurona origen; 
     private Neurona destino;
     private double distancia;
-    private String id;
+    private String idNeurotransmisor;
     private double k;
     private Sinapsis siguiente;
 
-    //Constructor
-    public Sinapsis(Neurona origen, Neurona destino, double distancia, String id, double k, Sinapsis siguiente) {
-        this.origen = origen;
+    public Sinapsis(Neurona destino, double distancia, String idNeurotransmisor, double k, Sinapsis siguiente) {
         this.destino = destino;
         this.distancia = distancia;
-        this.id = id;
+        this.idNeurotransmisor = idNeurotransmisor;
         this.k = k;
         this.siguiente = siguiente;
-    }
-
-    //Gettters y Setters
-    public Neurona getOrigen() {
-        return origen;
-    }
-
-    public void setOrigen(Neurona origen) {
-        this.origen = origen;
     }
 
     public Neurona getDestino() {
@@ -53,12 +41,12 @@ public class Sinapsis {
         this.distancia = distancia;
     }
 
-    public String getId() {
-        return id;
+    public String getIdNeurotransmisor() {
+        return idNeurotransmisor;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdNeurotransmisor(String idNeurotransmisor) {
+        this.idNeurotransmisor = idNeurotransmisor;
     }
 
     public double getK() {
@@ -76,6 +64,5 @@ public class Sinapsis {
     public void setSiguiente(Sinapsis siguiente) {
         this.siguiente = siguiente;
     }
-    
-    
+
 }
