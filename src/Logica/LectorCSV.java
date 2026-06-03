@@ -6,7 +6,7 @@ package Logica;
 
 /**
  *
- * @author bomelol
+ * @author andres
  */
 public class LectorCSV {
     

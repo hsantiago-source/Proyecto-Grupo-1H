@@ -7,6 +7,15 @@
             <file>file:/Users/bomelol/NetBeansProjects/Proyecto-Grupo-1H/src/EDD/ListaAdyacencia.java</file>
             <file>file:/Users/bomelol/NetBeansProjects/Proyecto-Grupo-1H/src/Entidades/Sinapsis.java</file>
             <file>file:/Users/bomelol/NetBeansProjects/Proyecto-Grupo-1H/src/Main/Main.java</file>
+            <file>file:/Users/bomelol/NetBeansProjects/Proyecto-Grupo-1H/src/Entidades/Neurotransmisor.java</file>
+            <file>file:/Users/bomelol/NetBeansProjects/Proyecto-Grupo-1H/src/EDD/GrafoSinaptico.java</file>
+            <file>file:/Users/bomelol/NetBeansProjects/Proyecto-Grupo-1H/src/EDD/TablaHashNeurotransmisores.java</file>
+            <file>file:/Users/bomelol/NetBeansProjects/Proyecto-Grupo-1H/src/EDD/NodoHash.java</file>
+            <file>file:/Users/bomelol/NetBeansProjects/Proyecto-Grupo-1H/src/Logica/ControladorPrincipal.java</file>
+            <file>file:/Users/bomelol/NetBeansProjects/Proyecto-Grupo-1H/src/Logica/LectorCSV.java</file>
+            <file>file:/Users/bomelol/NetBeansProjects/Proyecto-Grupo-1H/src/Logica/AnalizadorConectividad.java</file>
+            <file>file:/Users/bomelol/NetBeansProjects/Proyecto-Grupo-1H/src/Logica/CalculadoraDijkstra.java</file>
+            <file>file:/Users/bomelol/NetBeansProjects/Proyecto-Grupo-1H/src/Logica/SimuladorFatiga.java</file>
         </group>
     </open-files>
 </project-private>
