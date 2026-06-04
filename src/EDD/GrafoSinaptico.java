@@ -75,7 +75,7 @@ public class GrafoSinaptico {
         }
     }
     
-    public void agregarSinapsis(String idOrigen, String idDestino, double distancia, String idNeurotransmisor, double k) {
+    public String agregarSinapsis(String idOrigen, String idDestino, double distancia, String idNeurotransmisor, double k) {
         Neurona origen = buscarNeurona(idOrigen);
         Neurona destino = buscarNeurona(idDestino);
 
@@ -94,8 +94,9 @@ public class GrafoSinaptico {
                     }
                 }
             } else {
-                System.out.println("No se pudo crear la sinapsis porque la neurona no existe");
+                return "No se pudo crear la sinapsis porque la neurona no existe";
             }
+        return "Sinapsis creada exitosamente";
     }   
     
     public void eliminarNeurona(String id) {
