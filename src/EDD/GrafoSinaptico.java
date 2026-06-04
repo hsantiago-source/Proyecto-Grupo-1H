@@ -150,4 +150,50 @@ public class GrafoSinaptico {
             }
         }
     }
+    
+
+    //ENCOLAR o APILAR
+    public void insertFinal(Neurona dato) {
+        ListaAdyacencia vacia = new ListaAdyacencia();
+        Neurona clon = new Neurona(dato.getId(), dato.getActivo(), null, vacia);
+        
+        if (isEmpty()) {
+            neuronaInicio = clon;
+            neuronaFinal = clon;
+        } else {
+            neuronaFinal.setSiguiente(clon);
+            neuronaFinal = clon;
+        }
+    }
+
+    // DESENCOLAR 
+    public void deleteBegin() {
+        if (!isEmpty()) {
+            Neurona extraida = neuronaInicio;
+            neuronaInicio = neuronaInicio.getSiguiente();
+            
+            if (neuronaInicio == null) {
+                neuronaFinal = null;
+            }
+            extraida.setSiguiente(null); 
+        }
+    }
+
+    // DESAPILAR
+    public void deleteFinal() {
+        if (isEmpty()) return;
+
+        if (neuronaInicio == neuronaFinal) {
+            neuronaInicio = null;
+            neuronaFinal = null;
+        } else {
+            Neurona actual = neuronaInicio;
+            while (actual.getSiguiente() != neuronaFinal) {
+                actual = actual.getSiguiente();
+            }
+            
+            actual.setSiguiente(null); 
+            neuronaFinal = actual;     
+        }
+    }
 }
