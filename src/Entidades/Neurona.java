@@ -17,18 +17,20 @@ public class Neurona {
     private Boolean activo;
     private Neurona siguiente;
     private ListaAdyacencia conexiones;
-    private double dpesoAcumulado;
-    private Neurona dneuronaAnterior;
-    private double dpesoFijo;
+    private double dPesoAcumulado;
+    private Neurona dNeuronaAnterior;
+    private double dPesoFijo;
+    private Boolean dVisitado;
 
     public Neurona(String id, Boolean activo, Neurona siguiente, ListaAdyacencia conexiones) {
         this.id = id;
         this.activo = activo;
         this.siguiente = null;
         this.conexiones = conexiones;
-        this.dpesoAcumulado = 0;
-        this.dneuronaAnterior = null;
-        this.dpesoFijo = 0;
+        this.dPesoAcumulado = 0;
+        this.dNeuronaAnterior = null;
+        this.dPesoFijo = 0;
+        this.dVisitado = null; 
     }
 
     public String getId() {
@@ -64,27 +66,37 @@ public class Neurona {
     }
 
     public double getdPesoAcumulado() {
-        return dpesoAcumulado;
+        return dPesoAcumulado;
     }
 
-    public void setdPesoAcumulado(double dpesoAcumulado) {
-        this.dpesoAcumulado = dpesoAcumulado;
+    public void setdPesoAcumulado(double dPesoAcumulado) {
+        this.dPesoAcumulado = dPesoAcumulado;
     }
 
     public Neurona getdNeuronaAnterior() {
-        return dneuronaAnterior;
+        return dNeuronaAnterior;
     }
 
-    public void setdNeuronaAnterior(Neurona dneuronaAnterior) {
-        this.dneuronaAnterior = dneuronaAnterior;
+    public void setdNeuronaAnterior(Neurona dNeuronaAnterior) {
+        this.dNeuronaAnterior = dNeuronaAnterior;
     }
 
     public double getdPesoFijo() {
-        return dpesoFijo;
+        return dPesoFijo;
     }
 
-    public void setdPesoFijo(double dpesoFijo) {
-        this.dpesoFijo = dpesoFijo;
+    public void setdPesoFijo(double dPesoFijo) {
+        this.dPesoFijo = dPesoFijo;
     }
+
+    public Boolean getdVisitado() {
+        return dVisitado;
+    }
+
+    public void setdVisitado(Boolean dVisitado) {
+        this.dVisitado = dVisitado;
+    }
+
+
  
 }

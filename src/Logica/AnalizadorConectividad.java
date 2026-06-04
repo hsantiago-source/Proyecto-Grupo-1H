@@ -6,7 +6,6 @@ package Logica;
 
 import EDD.GrafoSinaptico;
 import Entidades.Neurona;
-import Interfaz.Global;
 import Entidades.Sinapsis;
 
 /**
@@ -16,7 +15,7 @@ import Entidades.Sinapsis;
 public class AnalizadorConectividad {
     
     private void reiniciarEstados() {
-        GrafoSinaptico grafoGlobal = Global.getGrafo();
+        GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
         Neurona actual = grafoGlobal.getNeuronaInicio();
         while (actual != null) {
             actual.setActivo(false);
@@ -25,7 +24,7 @@ public class AnalizadorConectividad {
     }
     
     public GrafoSinaptico BFS(String entrada) {
-        GrafoSinaptico grafoGlobal = Global.getGrafo();
+        GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
         GrafoSinaptico cola = new GrafoSinaptico(null, null);
         GrafoSinaptico bfs = new GrafoSinaptico(null, null);
         
@@ -62,7 +61,7 @@ public class AnalizadorConectividad {
     } 
 
     public GrafoSinaptico DFS(String entrada) {
-        GrafoSinaptico grafoGlobal = Global.getGrafo();
+        GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
         GrafoSinaptico pila = new GrafoSinaptico(null, null);
         GrafoSinaptico dfs = new GrafoSinaptico(null, null);
         
@@ -101,7 +100,7 @@ public class AnalizadorConectividad {
     }
 
     public String obtenerZonasAisladas() {
-        GrafoSinaptico grafoGlobal = Global.getGrafo();
+        GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
         String aisladas = "";
         
         if (grafoGlobal == null || grafoGlobal.isEmpty()){
@@ -125,7 +124,7 @@ public class AnalizadorConectividad {
     }
 
     public boolean estaFragmentada() {
-        GrafoSinaptico grafoGlobal = Global.getGrafo();
+        GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
         if (grafoGlobal == null || grafoGlobal.isEmpty()) {
             return false;
         }

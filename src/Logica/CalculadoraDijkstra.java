@@ -9,7 +9,6 @@ import EDD.TablaHashNeurotransmisores;
 import Entidades.Neurona;
 import Entidades.Neurotransmisor;
 import Entidades.Sinapsis;
-import Interfaz.Global;
 
 /**
  *
@@ -19,7 +18,7 @@ public class CalculadoraDijkstra {
     
 
     public double calcularPesoSinapsis(Sinapsis sinapsis) {
-        TablaHashNeurotransmisores diccionario = Global.getDiccionario();
+        TablaHashNeurotransmisores diccionario = ControladorPrincipal.getTablaHash();
         Neurotransmisor quimico = diccionario.buscar(sinapsis.getIdNeurotransmisor());
         
         double velocidad;
@@ -36,13 +35,13 @@ public class CalculadoraDijkstra {
 
 
     public GrafoSinaptico calcularRutaMasRapida(String idOrigen, String idDestino) {
-        GrafoSinaptico grafo = Global.getGrafo();
+        GrafoSinaptico grafo = ControladorPrincipal.getGrafo();
         
         Neurona actual = grafo.getNeuronaInicio();
         while (actual != null) {
             actual.setdPesoAcumulado(Double.MAX_VALUE); 
             actual.setdNeuronaAnterior(null);           
-            actual.setActivo(false);                 
+            actual.setdVisitado(false);                 
             actual = actual.getSiguiente();
         }
 
@@ -58,7 +57,7 @@ public class CalculadoraDijkstra {
                 break;
             }
             
-            neuronaActual.setActivo(true); 
+            neuronaActual.setdVisitado(true); 
 
             Sinapsis sinapsis = neuronaActual.getConexiones().getPrimeraSinapsis();
             while (sinapsis != null) {
@@ -80,10 +79,10 @@ public class CalculadoraDijkstra {
     private Neurona encontrarNeuronaMenorPeso() {
         Neurona neuronaConMenorPeso = null;
         double pesoMinimo = Double.MAX_VALUE;
-        Neurona actual = Global.getGrafo().getNeuronaInicio();
+        Neurona actual = ControladorPrincipal.getGrafo().getNeuronaInicio();
         
         while (actual != null) {
-            if (actual.getActivo() == false && actual.getdPesoAcumulado() < pesoMinimo) {
+            if (actual.getdVisitado() == false && actual.getdPesoAcumulado() < pesoMinimo) {
                 pesoMinimo = actual.getdPesoAcumulado();
                 neuronaConMenorPeso = actual;
             }
@@ -94,7 +93,7 @@ public class CalculadoraDijkstra {
 
     private GrafoSinaptico reconstruirRuta(String idOrigen, String idDestino) {
         GrafoSinaptico ruta = new GrafoSinaptico(null, null);
-        Neurona actual = Global.getGrafo().buscarNeurona(idDestino);
+        Neurona actual = ControladorPrincipal.getGrafo().buscarNeurona(idDestino);
         
         while (actual != null) {
             ruta.insertFinal(actual); 
