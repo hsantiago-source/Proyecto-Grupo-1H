@@ -17,12 +17,12 @@ public class Sinapsis {
     private double k;
     private Sinapsis siguiente;
 
-    public Sinapsis(Neurona destino, double distancia, String idNeurotransmisor, double k, Sinapsis siguiente) {
+    public Sinapsis(Neurona destino, double distancia, String idNeurotransmisor, double k) {
         this.destino = destino;
         this.distancia = distancia;
         this.idNeurotransmisor = idNeurotransmisor;
         this.k = k;
-        this.siguiente = siguiente;
+        this.siguiente = null;
     }
 
     public Neurona getDestino() {

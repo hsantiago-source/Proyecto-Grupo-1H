@@ -83,7 +83,7 @@ public class GrafoSinaptico {
                 ListaAdyacencia listaOrigen = origen.getConexiones();
 
                 if (!listaOrigen.existeAdyacencia(idDestino)) {
-                    Sinapsis nuevaSinapsis = new Sinapsis(destino, distancia, idNeurotransmisor, k, null);
+                    Sinapsis nuevaSinapsis = new Sinapsis(destino, distancia, idNeurotransmisor, k);
 
                     if (listaOrigen.isEmpty()) {
                         listaOrigen.setPrimeraSinapsis(nuevaSinapsis);

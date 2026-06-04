@@ -17,12 +17,18 @@ public class Neurona {
     private Boolean activo;
     private Neurona siguiente;
     private ListaAdyacencia conexiones;
+    private double dpesoAcumulado;
+    private Neurona dneuronaAnterior;
+    private double dpesoFijo;
 
     public Neurona(String id, Boolean activo, Neurona siguiente, ListaAdyacencia conexiones) {
         this.id = id;
         this.activo = activo;
         this.siguiente = null;
         this.conexiones = conexiones;
+        this.dpesoAcumulado = 0;
+        this.dneuronaAnterior = null;
+        this.dpesoFijo = 0;
     }
 
     public String getId() {
@@ -57,5 +63,28 @@ public class Neurona {
         this.conexiones = conexiones;
     }
 
+    public double getdPesoAcumulado() {
+        return dpesoAcumulado;
+    }
+
+    public void setdPesoAcumulado(double dpesoAcumulado) {
+        this.dpesoAcumulado = dpesoAcumulado;
+    }
+
+    public Neurona getdNeuronaAnterior() {
+        return dneuronaAnterior;
+    }
+
+    public void setdNeuronaAnterior(Neurona dneuronaAnterior) {
+        this.dneuronaAnterior = dneuronaAnterior;
+    }
+
+    public double getdPesoFijo() {
+        return dpesoFijo;
+    }
+
+    public void setdPesoFijo(double dpesoFijo) {
+        this.dpesoFijo = dpesoFijo;
+    }
  
 }

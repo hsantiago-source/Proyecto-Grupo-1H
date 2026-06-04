@@ -75,7 +75,7 @@ public class TablaHashNeurotransmisores {
         return null; 
     }
 
-    public void vaciarDiccionario() {
+    public void vaciarDiccionario() {   
         this.tabla = new NodoHash[this.capacidad];
     }
 
