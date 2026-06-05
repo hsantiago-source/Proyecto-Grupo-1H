@@ -35,7 +35,7 @@
                         String descripcion = datos[4].trim();
 
                         Neurotransmisor quimico = new Neurotransmisor(id, nombre, efecto, velocidad, descripcion);
-                        diccionario.insertar(id, quimico);
+                        diccionario.insertar(quimico);
                     } else {
                         System.out.println("Línea ignorada por formato incorrecto"); 
                     }

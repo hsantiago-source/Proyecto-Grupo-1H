@@ -62,6 +62,6 @@ public class Neurotransmisor {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
     
 }

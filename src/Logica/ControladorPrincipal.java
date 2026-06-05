@@ -5,8 +5,10 @@
 package Logica;
 
 import EDD.GrafoSinaptico;
+import EDD.NodoHash;
 import EDD.TablaHashNeurotransmisores;
 import Entidades.Neurona;
+import Entidades.Neurotransmisor;
 import Entidades.Sinapsis;
 
 /**
@@ -129,7 +131,7 @@ public class ControladorPrincipal {
         }
 
         String resultado = "";
-        Entidades.Neurona actual = recorrido.getNeuronaInicio();
+        Neurona actual = recorrido.getNeuronaInicio();
         
         while (actual != null) {
             if (resultado.isEmpty() == true) {
@@ -149,7 +151,7 @@ public class ControladorPrincipal {
         }
 
         String textoRuta = "";
-        Entidades.Neurona actual = ruta.getNeuronaInicio();
+        Neurona actual = ruta.getNeuronaInicio();
 
         while (actual != null) {
             if (textoRuta.isEmpty() == true) {
@@ -161,5 +163,40 @@ public class ControladorPrincipal {
         }
 
         return "Tiempo Total: " + String.valueOf(pesoTotal) + "\n\nRuta: " + textoRuta;
+    }
+   
+
+    public String mostrarListaNeurotransmisores() {
+        if (tablaHash == null) {
+            return "No hay diccionario cargado.\n";
+        }
+
+        String lista = "--- DICCIONARIO DE NEUROTRANSMISORES ---\n\n";
+        boolean vacio = true;
+
+        for (int i = 0; i < tablaHash.getCapacidad(); i++) {
+            NodoHash actual = tablaHash.getTabla()[i];
+            
+            while (actual != null) {
+                Neurotransmisor n = actual.getQuimico();
+                lista += "ID: " + n.getId() + ", Nombre: " + n.getNombre() + ", Efecto: " + n.getEfecto() + ", Vel: " + n.getVelocidad() + "\n";
+                vacio = false;
+                actual = actual.getSiguiente();
+            }
+        }
+
+        if (vacio == true) {
+            return "El diccionario de neurotransmisores está vacío.\n";
+        }
+
+        return lista;
+    }
+    
+    public static void vaciarGrafo() {
+        grafo = new GrafoSinaptico();
+    }
+
+    public static void vaciarDiccionario() {
+        tablaHash = new TablaHashNeurotransmisores(101);
     }
 }

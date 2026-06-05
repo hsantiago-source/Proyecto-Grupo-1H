@@ -23,7 +23,7 @@ public class AnalizadorConectividad {
         }
     }
     
-public GrafoSinaptico BFS(String entrada) {
+    public GrafoSinaptico BFS(String entrada) {
         GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
         GrafoSinaptico cola = new GrafoSinaptico();
         GrafoSinaptico bfs = new GrafoSinaptico();
@@ -111,7 +111,7 @@ public GrafoSinaptico BFS(String entrada) {
         
         while (actual != null) {
             if (actual.getActivo() == false) {
-                aisladas += "- Neurona " + actual.getId() + " ";
+                aisladas += actual.getId() + " - ";
             }
             actual = actual.getSiguiente();
         }
@@ -119,7 +119,7 @@ public GrafoSinaptico BFS(String entrada) {
         if (aisladas.isEmpty()) {
             return "No hay ninguna neurona aislada";
         } else {
-            return "ZONAS AISLADAS DETECTADAS:\n" + aisladas;
+            return "ZONAS AISLADAS DETECTADAS:\n- " + aisladas;
         }
     }
 

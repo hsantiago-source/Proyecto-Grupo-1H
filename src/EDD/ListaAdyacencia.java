@@ -13,7 +13,6 @@ public class ListaAdyacencia {
 
     // Constructor de la clase
     public ListaAdyacencia() {
-        this.primeraSinapsis = null;
         this.ultimaSinapsis = null;
     }
 

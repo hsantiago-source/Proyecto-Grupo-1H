@@ -49,14 +49,13 @@ public class TablaHashNeurotransmisores {
         return hash;
     }
 
-    public void insertar(String clave, Neurotransmisor quimico) {
-        int indice = funcionHash(clave);
-        NodoHash nuevoNodo = new NodoHash(clave, quimico, null);
-
+    public void insertar(Neurotransmisor n) {
+        int indice = funcionHash(n.getId());
+        
         if (tabla[indice] == null) {
-            tabla[indice] = nuevoNodo;
+            tabla[indice] = new NodoHash(n.getId(), n, null);
         } else {
-            nuevoNodo.setSiguiente(tabla[indice]);
+            NodoHash nuevoNodo = new NodoHash(n.getId(), n, tabla[indice]);
             tabla[indice] = nuevoNodo;
         }
     }
@@ -79,5 +78,24 @@ public class TablaHashNeurotransmisores {
         this.tabla = new NodoHash[this.capacidad];
     }
 
+    
+    public void eliminar(String id) {
+        int indice = funcionHash(id);
+        NodoHash actual = tabla[indice];
+        NodoHash anterior = null;
+
+        while (actual != null) {
+            if (actual.getClave().equals(id)) {
+                if (anterior == null) {
+                    tabla[indice] = actual.getSiguiente();
+                } else {
+                    anterior.setSiguiente(actual.getSiguiente());
+                }
+                return; 
+            }
+            anterior = actual;
+            actual = actual.getSiguiente();
+        }
+    }
 
 }
