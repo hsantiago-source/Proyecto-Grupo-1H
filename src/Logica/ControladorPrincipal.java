@@ -122,4 +122,44 @@ public class ControladorPrincipal {
 
         return lista;
     }
+    
+    public String textoRecorridoDFSoBFS(GrafoSinaptico recorrido) {
+        if (recorrido == null || recorrido.isEmpty() == true) {
+            return "No se pudo realizar el recorrido o la red está vacía.";
+        }
+
+        String resultado = "";
+        Entidades.Neurona actual = recorrido.getNeuronaInicio();
+        
+        while (actual != null) {
+            if (resultado.isEmpty() == true) {
+                resultado = actual.getId();
+            } else {
+                resultado = resultado + " -> " + actual.getId();
+            }
+            actual = actual.getSiguiente();
+        }
+        
+        return resultado;
+    }
+    
+    public String textoResultadoDijkstra(double pesoTotal, GrafoSinaptico ruta) {
+        if (ruta == null || ruta.isEmpty() == true) {
+            return "No existe un camino posible.";
+        }
+
+        String textoRuta = "";
+        Entidades.Neurona actual = ruta.getNeuronaInicio();
+
+        while (actual != null) {
+            if (textoRuta.isEmpty() == true) {
+                textoRuta = actual.getId();
+            } else {
+                textoRuta = actual.getId() + " -> " + textoRuta;
+            }
+            actual = actual.getSiguiente();
+        }
+
+        return "Tiempo Total: " + String.valueOf(pesoTotal) + "\n\nRuta: " + textoRuta;
+    }
 }

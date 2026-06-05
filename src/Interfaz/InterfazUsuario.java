@@ -16,7 +16,7 @@ import Entidades.Sinapsis;
 import Logica.ControladorPrincipal;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
-
+import java.util.Locale;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.Edge;
@@ -102,7 +102,30 @@ public class InterfazUsuario extends javax.swing.JFrame {
         muestraGrafo = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         VistaDijkstra = new javax.swing.JPanel();
+        grafodijkstra = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        IdNeuronaOrigen = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        IdNeuronaDestino = new javax.swing.JTextField();
+        Dijkstra = new javax.swing.JButton();
+        simulacionfatiga = new javax.swing.JButton();
+        fatiga = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        resultDijkstra = new javax.swing.JTextArea();
+        grafooriginal = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         VistaDFSyBFS = new javax.swing.JPanel();
+        grafo = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        IdNeuronaFuente = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        resultDFSyBFS = new javax.swing.JTextArea();
+        DFS = new javax.swing.JButton();
+        BFS = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
         VistaInicio = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
@@ -138,6 +161,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
         Sidebar.add(SimulacionDijkstra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 167, -1));
 
         dfsybfs.setText("Simulación DFS y BFS");
+        dfsybfs.addActionListener(this::dfsybfsActionPerformed);
         Sidebar.add(dfsybfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 167, -1));
 
         Neurotransmisor.setText("Edición Neurotrans.");
@@ -279,10 +303,91 @@ public class InterfazUsuario extends javax.swing.JFrame {
 
         VistaDijkstra.setBackground(new java.awt.Color(245, 245, 245));
         VistaDijkstra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        VistaDijkstra.add(grafodijkstra, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 270, 270));
+
+        jLabel13.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel13.setText("Grafo camino resultante");
+        VistaDijkstra.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 18, 170, 20));
+
+        IdNeuronaOrigen.addActionListener(this::IdNeuronaOrigenActionPerformed);
+        VistaDijkstra.add(IdNeuronaOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 180, 20));
+
+        jLabel14.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        jLabel14.setText("ID Neurona de Origen");
+        VistaDijkstra.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, -1, -1));
+
+        IdNeuronaDestino.addActionListener(this::IdNeuronaDestinoActionPerformed);
+        VistaDijkstra.add(IdNeuronaDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 180, 20));
+
+        Dijkstra.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        Dijkstra.setText("Ejecutar Simulación Dijkstra");
+        Dijkstra.addActionListener(this::DijkstraActionPerformed);
+        VistaDijkstra.add(Dijkstra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 230, 50));
+
+        simulacionfatiga.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        simulacionfatiga.setText("Simular Fatiga");
+        simulacionfatiga.addActionListener(this::simulacionfatigaActionPerformed);
+        VistaDijkstra.add(simulacionfatiga, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 130, 50));
+
+        fatiga.setEditable(false);
+        fatiga.setText("0");
+        VistaDijkstra.add(fatiga, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 460, 100, -1));
+
+        jLabel15.setText("Factor de Fatiga");
+        VistaDijkstra.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, -1, 20));
+
+        resultDijkstra.setColumns(20);
+        resultDijkstra.setRows(5);
+        jScrollPane3.setViewportView(resultDijkstra);
+
+        VistaDijkstra.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 390, 260, -1));
+        VistaDijkstra.add(grafooriginal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 290, 270));
+
+        jLabel16.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        jLabel16.setText("ID Neurona de Destino");
+        VistaDijkstra.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel17.setText("Grafo Original");
+        VistaDijkstra.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 160, -1));
+
         PanelContenedor.add(VistaDijkstra, "card4");
 
         VistaDFSyBFS.setBackground(new java.awt.Color(245, 245, 245));
         VistaDFSyBFS.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        VistaDFSyBFS.add(grafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 580, 250));
+
+        jLabel18.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        jLabel18.setText("Resultado del recorrido");
+        VistaDFSyBFS.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, -1, -1));
+
+        IdNeuronaFuente.addActionListener(this::IdNeuronaFuenteActionPerformed);
+        VistaDFSyBFS.add(IdNeuronaFuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 180, 20));
+
+        resultDFSyBFS.setColumns(20);
+        resultDFSyBFS.setRows(5);
+        jScrollPane4.setViewportView(resultDFSyBFS);
+
+        VistaDFSyBFS.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 280, 140));
+
+        DFS.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        DFS.setText("Ejecutra Recorrido DFS");
+        DFS.addActionListener(this::DFSActionPerformed);
+        VistaDFSyBFS.add(DFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 230, 40));
+
+        BFS.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        BFS.setText("Ejecutra Recorrido BFS");
+        BFS.addActionListener(this::BFSActionPerformed);
+        VistaDFSyBFS.add(BFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 230, 40));
+
+        jLabel19.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel19.setText("Grafo evaluado (Verde Recorrido - Rojo Aislado)");
+        VistaDFSyBFS.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 370, -1));
+
+        jLabel20.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        jLabel20.setText("ID Neurona Fuente");
+        VistaDFSyBFS.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, -1, -1));
+
         PanelContenedor.add(VistaDFSyBFS, "card5");
 
         VistaInicio.setBackground(new java.awt.Color(245, 245, 245));
@@ -341,7 +446,55 @@ public class InterfazUsuario extends javax.swing.JFrame {
       }//GEN-LAST:event_NeuronasActionPerformed
 
     private void SimulacionDijkstraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimulacionDijkstraActionPerformed
-        // TODO add your handling code here:
+        PanelContenedor.removeAll();
+        PanelContenedor.add(VistaDijkstra);
+        PanelContenedor.repaint();
+        PanelContenedor.revalidate();
+        
+        GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
+
+        if (grafoGlobal == null || grafoGlobal.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "La red neuronal está vacía. Cargue datos antes de simular.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+        Graph graphOriginal = new SingleGraph("GrafoOriginal");
+        graphOriginal.setStrict(false);
+        graphOriginal.setAutoCreate(true);
+
+        Neurona neuronaActual = grafoGlobal.getNeuronaInicio();
+        while (neuronaActual != null) {
+            String idString = neuronaActual.getId();
+            Node n = graphOriginal.addNode(idString);
+            n.setAttribute("ui.label", idString); 
+            neuronaActual = neuronaActual.getSiguiente();
+        }
+
+        neuronaActual = grafoGlobal.getNeuronaInicio();
+        while (neuronaActual != null) {
+            Sinapsis sinapsisActual = neuronaActual.getConexiones().getPrimeraSinapsis();
+            while (sinapsisActual != null) {
+                String idOrigen = neuronaActual.getId();
+                String idDestino = sinapsisActual.getDestino().getId();
+                String idArista = idOrigen + "-" + idDestino;
+                graphOriginal.addEdge(idArista, idOrigen, idDestino, true);
+                sinapsisActual = sinapsisActual.getSiguiente();
+            }
+            neuronaActual = neuronaActual.getSiguiente();
+        }
+        
+        graphOriginal.setAttribute("ui.stylesheet", "node { fill-color: green; size: 25px; text-size: 18px; text-style: bold; text-alignment: center; } edge { fill-color: black; }");
+
+        Viewer viewerOrig = new Viewer(graphOriginal, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+        viewerOrig.enableAutoLayout(); 
+        ViewPanel viewPanelOrig = viewerOrig.addDefaultView(false); 
+
+        grafooriginal.removeAll();
+        grafooriginal.setLayout(new BorderLayout());
+        grafooriginal.add(viewPanelOrig, BorderLayout.CENTER);
+        grafooriginal.repaint();
+        grafooriginal.revalidate();
     }//GEN-LAST:event_SimulacionDijkstraActionPerformed
 
     private void BotonDatosRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDatosRedActionPerformed
@@ -602,12 +755,12 @@ public class InterfazUsuario extends javax.swing.JFrame {
             double distancia = Double.parseDouble(distanciaStr);
             double k = Double.parseDouble(kStr);
             
-            if (distancia>1 || distancia <0) {
-                throw new Exception("La distancia debe ser un valor entre 0 y 1.");
+            if (distancia>1 || distancia <=0) {
+                throw new Exception("La distancia debe ser un valor entre (0,1].");
             }
             
-            if (k>1 || k <0){
-                throw new Exception("El coeficiente K debe ser un valor entre 0 y 1.");
+            if (k>1 || k <=0){
+                throw new Exception("El coeficiente K debe ser un valor entre (0,1].");
             }   
             
             TablaHashNeurotransmisores tablaNeuro = ControladorPrincipal.getTablaHash();
@@ -700,6 +853,308 @@ String origen = IdOrigen1.getText().trim();
         // TODO add your handling code here:
     }//GEN-LAST:event_NeurotransmisorActionPerformed
 
+    private void IdNeuronaOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdNeuronaOrigenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IdNeuronaOrigenActionPerformed
+
+    private void IdNeuronaDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdNeuronaDestinoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IdNeuronaDestinoActionPerformed
+
+    private void simulacionfatigaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulacionfatigaActionPerformed
+        try {
+            GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
+            if (grafoGlobal == null || grafoGlobal.isEmpty() == true) {
+                JOptionPane.showMessageDialog(this, "No hay red cargada para aplicar fatiga.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Logica.SimuladorFatiga simulador = new Logica.SimuladorFatiga();
+            simulador.aplicarFatiga();
+            
+            double factorFijo = 1.2;
+            
+            double fatigaActual = Double.parseDouble(fatiga.getText().replace(",", "."));
+            
+            double fatigaTotal;
+            if (fatigaActual == 0) {
+                fatigaTotal = factorFijo;
+            } else {
+                fatigaTotal = fatigaActual * factorFijo;
+            } 
+            
+            fatiga.setText(String.valueOf(fatigaTotal));
+            
+            JOptionPane.showMessageDialog(this, "Fatiga aplicada exitosamente. Factor acumulado: " + String.valueOf(fatigaTotal));
+            
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al aplicar fatiga: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_simulacionfatigaActionPerformed
+
+    private void DijkstraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DijkstraActionPerformed
+        String origen = IdNeuronaOrigen.getText().trim();
+        String destino = IdNeuronaDestino.getText().trim();
+        
+        if (origen.isEmpty() == true || destino.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese el Origen y Destino.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
+        
+        if (grafoGlobal.existeNeurona(origen) == false || grafoGlobal.existeNeurona(destino) == false) {
+            JOptionPane.showMessageDialog(this, "El origen o destino no existen en la red.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        Logica.CalculadoraDijkstra calc = new Logica.CalculadoraDijkstra();
+        GrafoSinaptico ruta = calc.calcularRutaMasRapida(origen, destino);
+        
+        Neurona neuronaDest = grafoGlobal.buscarNeurona(destino);
+        if (neuronaDest.getdPesoAcumulado() == Double.MAX_VALUE) {
+            JOptionPane.showMessageDialog(this, "No existe un camino físico entre '" + origen + "' y '" + destino + "'.", "Ruta Inalcanzable", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        ControladorPrincipal controlador = new ControladorPrincipal();
+        String resultadoFinal = controlador.textoResultadoDijkstra(neuronaDest.getdPesoAcumulado(), ruta);
+        resultDijkstra.setText(resultadoFinal);
+        
+        System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+        Graph graphDijkstra = new SingleGraph("GrafoDijkstra");
+        graphDijkstra.setStrict(false);
+        graphDijkstra.setAutoCreate(true);
+        
+        Neurona actualRuta = ruta.getNeuronaInicio();
+        while (actualRuta != null) {
+            String idNodo = actualRuta.getId();
+            Node n = graphDijkstra.addNode(idNodo);
+            n.setAttribute("ui.label", idNodo);
+            
+            if (actualRuta.getSiguiente() != null) {
+                String idDestArista = actualRuta.getId();
+                String idOrigArista = actualRuta.getSiguiente().getId();
+                String idArista = idOrigArista + "-" + idDestArista;
+                graphDijkstra.addEdge(idArista, idOrigArista, idDestArista, true);
+            }
+            actualRuta = actualRuta.getSiguiente();
+        }
+        
+        graphDijkstra.setAttribute("ui.stylesheet", "node { fill-color: red; size: 30px; text-size: 20px; text-style: bold; text-alignment: center; } edge { fill-color: red; size: 3px; }");
+        
+        Viewer viewerDijk = new Viewer(graphDijkstra, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+        viewerDijk.enableAutoLayout(); 
+        ViewPanel viewPanelDijk = viewerDijk.addDefaultView(false); 
+
+        grafodijkstra.removeAll();
+        grafodijkstra.setLayout(new BorderLayout());
+        grafodijkstra.add(viewPanelDijk, BorderLayout.CENTER);
+        grafodijkstra.repaint();
+        grafodijkstra.revalidate();
+    }//GEN-LAST:event_DijkstraActionPerformed
+
+    private void IdNeuronaFuenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdNeuronaFuenteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IdNeuronaFuenteActionPerformed
+
+    private void DFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DFSActionPerformed
+        
+        String fuente = IdNeuronaFuente.getText().trim();
+        
+        if (fuente.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "Ingrese el ID de la Neurona Fuente.", "Campo Vacío", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
+        if (grafoGlobal == null || grafoGlobal.existeNeurona(fuente) == false) {
+            JOptionPane.showMessageDialog(this, "La neurona no existe o no hay red cargada.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Logica.AnalizadorConectividad analizador = new Logica.AnalizadorConectividad();
+        GrafoSinaptico rutaDFS = analizador.DFS(fuente);
+        
+        ControladorPrincipal controlador = new ControladorPrincipal();
+        String recorridoTexto = controlador.textoRecorridoDFSoBFS(rutaDFS);
+        resultDFSyBFS.setText("Recorrido DFS:\n" + recorridoTexto);
+        
+        System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+        Graph graphDFS = new SingleGraph("GrafoDFS");
+        graphDFS.setStrict(false);
+        graphDFS.setAutoCreate(true);
+
+        Neurona neuronaActual = grafoGlobal.getNeuronaInicio();
+        while (neuronaActual != null) {
+            String idString = neuronaActual.getId();
+            Node n = graphDFS.addNode(idString);
+            n.setAttribute("ui.label", idString);
+            
+            if (neuronaActual.getActivo() == true) {
+                n.setAttribute("ui.class", "conectado");
+            } else {
+                n.setAttribute("ui.class", "aislado");
+            }
+            neuronaActual = neuronaActual.getSiguiente();
+        }
+
+        neuronaActual = grafoGlobal.getNeuronaInicio();
+        while (neuronaActual != null) {
+            Sinapsis sinapsisActual = neuronaActual.getConexiones().getPrimeraSinapsis();
+            while (sinapsisActual != null) {
+                String idOrigen = neuronaActual.getId();
+                String idDestino = sinapsisActual.getDestino().getId();
+                String idArista = idOrigen + "-" + idDestino;
+                graphDFS.addEdge(idArista, idOrigen, idDestino, true);
+                sinapsisActual = sinapsisActual.getSiguiente();
+            }
+            neuronaActual = neuronaActual.getSiguiente();
+        }
+
+        // Aplicamos la hoja de estilos con los colores
+        String styleSheet = "node { size: 30px; text-size: 18px; text-style: bold; text-alignment: center; } " +
+                            "node.conectado { fill-color: green; } " +
+                            "node.aislado { fill-color: red; } " +
+                            "edge { fill-color: black; }";
+        graphDFS.setAttribute("ui.stylesheet", styleSheet);
+
+        Viewer viewer = new Viewer(graphDFS, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+        viewer.enableAutoLayout(); 
+        ViewPanel viewPanel = viewer.addDefaultView(false); 
+
+        grafo.removeAll();
+        grafo.setLayout(new BorderLayout());
+        grafo.add(viewPanel, BorderLayout.CENTER);
+        grafo.repaint();
+        grafo.revalidate();
+    }//GEN-LAST:event_DFSActionPerformed
+
+    private void BFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BFSActionPerformed
+        
+        String fuente = IdNeuronaFuente.getText().trim();
+        
+        if (fuente.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "Ingrese el ID de la Neurona Fuente.", "Campo Vacío", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
+        if (grafoGlobal == null || grafoGlobal.existeNeurona(fuente) == false) {
+            JOptionPane.showMessageDialog(this, "La neurona no existe o no hay red cargada.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Logica.AnalizadorConectividad analizador = new Logica.AnalizadorConectividad();
+        GrafoSinaptico rutaBFS = analizador.BFS(fuente);
+        
+        ControladorPrincipal controlador = new ControladorPrincipal();
+        String recorridoTexto = controlador.textoRecorridoDFSoBFS(rutaBFS);
+        resultDFSyBFS.setText("Recorrido BFS:\n" + recorridoTexto);
+        
+        System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+        Graph graphBFS = new SingleGraph("GrafoBFS");
+        graphBFS.setStrict(false);
+        graphBFS.setAutoCreate(true);
+
+        Neurona neuronaActual = grafoGlobal.getNeuronaInicio();
+        while (neuronaActual != null) {
+            String idString = neuronaActual.getId();
+            Node n = graphBFS.addNode(idString);
+            n.setAttribute("ui.label", idString);
+            
+            if (neuronaActual.getActivo() == true) {
+                n.setAttribute("ui.class", "conectado");
+            } else {
+                n.setAttribute("ui.class", "aislado");
+            }
+            neuronaActual = neuronaActual.getSiguiente();
+        }
+
+        neuronaActual = grafoGlobal.getNeuronaInicio();
+        while (neuronaActual != null) {
+            Sinapsis sinapsisActual = neuronaActual.getConexiones().getPrimeraSinapsis();
+            while (sinapsisActual != null) {
+                String idOrigen = neuronaActual.getId();
+                String idDestino = sinapsisActual.getDestino().getId();
+                String idArista = idOrigen + "-" + idDestino;
+                graphBFS.addEdge(idArista, idOrigen, idDestino, true);
+                sinapsisActual = sinapsisActual.getSiguiente();
+            }
+            neuronaActual = neuronaActual.getSiguiente();
+        }
+
+        String styleSheet = "node { size: 30px; text-size: 18px; text-style: bold; text-alignment: center; } " +
+                            "node.conectado { fill-color: green; } " +
+                            "node.aislado { fill-color: red; } " +
+                            "edge { fill-color: black; }";
+        graphBFS.setAttribute("ui.stylesheet", styleSheet);
+
+        Viewer viewer = new Viewer(graphBFS, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+        viewer.enableAutoLayout(); 
+        ViewPanel viewPanel = viewer.addDefaultView(false); 
+
+        grafo.removeAll();
+        grafo.setLayout(new BorderLayout());
+        grafo.add(viewPanel, BorderLayout.CENTER);
+        grafo.repaint();
+        grafo.revalidate();
+    }//GEN-LAST:event_BFSActionPerformed
+
+    private void dfsybfsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dfsybfsActionPerformed
+        PanelContenedor.removeAll();
+        PanelContenedor.add(VistaDFSyBFS);
+        PanelContenedor.repaint();
+        PanelContenedor.revalidate();
+        
+        GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
+
+        if (grafoGlobal == null || grafoGlobal.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "La red neuronal está vacía. Cargue datos primero.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+        Graph graphInicial = new SingleGraph("GrafoInicial");
+        graphInicial.setStrict(false);
+        graphInicial.setAutoCreate(true);
+
+        Neurona neuronaActual = grafoGlobal.getNeuronaInicio();
+        while (neuronaActual != null) {
+            String idString = neuronaActual.getId();
+            Node n = graphInicial.addNode(idString);
+            n.setAttribute("ui.label", idString);
+            neuronaActual = neuronaActual.getSiguiente();
+        }
+
+        neuronaActual = grafoGlobal.getNeuronaInicio();
+        while (neuronaActual != null) {
+            Sinapsis sinapsisActual = neuronaActual.getConexiones().getPrimeraSinapsis();
+            while (sinapsisActual != null) {
+                String idOrigen = neuronaActual.getId();
+                String idDestino = sinapsisActual.getDestino().getId();
+                String idArista = idOrigen + "-" + idDestino;
+                graphInicial.addEdge(idArista, idOrigen, idDestino, true);
+                sinapsisActual = sinapsisActual.getSiguiente();
+            }
+            neuronaActual = neuronaActual.getSiguiente();
+        }
+
+        String styleSheet = "node { fill-color: green; size: 30px; text-size: 18px; text-style: bold; text-alignment: center; } " +
+                            "edge { fill-color: black; }";
+        graphInicial.setAttribute("ui.stylesheet", styleSheet);
+
+        Viewer viewer = new Viewer(graphInicial, Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
+        viewer.enableAutoLayout(); 
+        ViewPanel viewPanel = viewer.addDefaultView(false); 
+
+        grafo.removeAll();
+        grafo.setLayout(new BorderLayout());
+        grafo.add(viewPanel, BorderLayout.CENTER);
+        grafo.repaint();
+        grafo.revalidate();
+    }//GEN-LAST:event_dfsybfsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -730,15 +1185,21 @@ String origen = IdOrigen1.getText().trim();
     private javax.swing.JButton AgregarSinapsis;
     private javax.swing.JTextArea AreaTextoNeuro;
     private javax.swing.JTextArea AreaTextoRed;
+    private javax.swing.JButton BFS;
     private javax.swing.JButton BotonDatosRed;
     private javax.swing.JButton BotonDicNeuro;
     private javax.swing.JButton CargaCSV;
     private javax.swing.JTextField CoeficienteK;
+    private javax.swing.JButton DFS;
+    private javax.swing.JButton Dijkstra;
     private javax.swing.JTextField Distancia;
     private javax.swing.JButton EliminarNeurona;
     private javax.swing.JButton EliminarSinapsis;
     private javax.swing.JTextField IdDestino;
     private javax.swing.JTextField IdNeurona;
+    private javax.swing.JTextField IdNeuronaDestino;
+    private javax.swing.JTextField IdNeuronaFuente;
+    private javax.swing.JTextField IdNeuronaOrigen;
     private javax.swing.JTextField IdOrigen1;
     private javax.swing.JScrollPane NeuronaScroll;
     private javax.swing.JButton Neuronas;
@@ -761,11 +1222,23 @@ String origen = IdOrigen1.getText().trim();
     private javax.swing.JPanel VistaSinapsis;
     private javax.swing.JPanel VistaVerRed;
     private javax.swing.JButton dfsybfs;
+    private javax.swing.JTextField fatiga;
+    private javax.swing.JPanel grafo;
+    private javax.swing.JPanel grafodijkstra;
+    private javax.swing.JPanel grafooriginal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -777,6 +1250,11 @@ String origen = IdOrigen1.getText().trim();
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPanel muestraGrafo;
+    private javax.swing.JTextArea resultDFSyBFS;
+    private javax.swing.JTextArea resultDijkstra;
+    private javax.swing.JButton simulacionfatiga;
     // End of variables declaration//GEN-END:variables
 }

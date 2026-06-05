@@ -50,6 +50,8 @@ public class CalculadoraDijkstra {
             return null;
         }
         
+        origen.setdPesoAcumulado(0.0);
+        
         while (true) {
             Neurona neuronaActual = encontrarNeuronaMenorPeso();
             

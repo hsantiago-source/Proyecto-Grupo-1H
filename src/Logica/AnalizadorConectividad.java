@@ -23,7 +23,7 @@ public class AnalizadorConectividad {
         }
     }
     
-    public GrafoSinaptico BFS(String entrada) {
+public GrafoSinaptico BFS(String entrada) {
         GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
         GrafoSinaptico cola = new GrafoSinaptico();
         GrafoSinaptico bfs = new GrafoSinaptico();
@@ -32,31 +32,32 @@ public class AnalizadorConectividad {
 
         Neurona origen = grafoGlobal.buscarNeurona(entrada);
         if (origen == null) {
-            return bfs;
+            return bfs; 
         } 
         
-        Sinapsis destino = origen.getConexiones().getPrimeraSinapsis();
-        
-        bfs.insertFinal(origen);
+        cola.insertFinal(origen);
         origen.setActivo(true); 
 
-        while (origen != null && destino != null) {
-            Neurona vecino = grafoGlobal.buscarNeurona(destino.getDestino().getId());
+        while (cola.isEmpty() == false) {
             
-            if (vecino.getActivo()==false) {
-                cola.insertFinal(vecino);
-                vecino.setActivo(true); 
-            }
-            destino = destino.getSiguiente();
+            Neurona nodoEnCola = cola.getNeuronaInicio();
+            Neurona actual = grafoGlobal.buscarNeurona(nodoEnCola.getId());
+            cola.deleteBegin(); 
             
-            if (destino == null && !cola.isEmpty()) {
-                origen = grafoGlobal.buscarNeurona(cola.getNeuronaInicio().getId());
-                destino = origen.getConexiones().getPrimeraSinapsis();
+            bfs.insertFinal(actual);
+            
+            Sinapsis sinapsis = actual.getConexiones().getPrimeraSinapsis();
+            while (sinapsis != null) {
+                Neurona vecino = grafoGlobal.buscarNeurona(sinapsis.getDestino().getId());
                 
-                bfs.insertFinal(origen);
-                cola.deleteBegin();
+                if (vecino.getActivo() == false) {
+                    vecino.setActivo(true); 
+                    cola.insertFinal(vecino);
+                }
+                sinapsis = sinapsis.getSiguiente();
             }
         }
+        
         return bfs;  
     } 
 
@@ -72,30 +73,29 @@ public class AnalizadorConectividad {
             return dfs;
         }
         
-        Sinapsis destino = origen.getConexiones().getPrimeraSinapsis();
-        dfs.insertFinal(origen);
-        origen.setActivo(true); 
+        pila.insertFinal(origen);
 
-        while (origen != null && destino != null) {
-            Neurona vecino = grafoGlobal.buscarNeurona(destino.getDestino().getId());
+        while (pila.isEmpty() == false) {
             
-            if (vecino.getActivo() == false) {
-                pila.insertFinal(vecino);
-            }
-            destino = destino.getSiguiente();
+            Neurona nodoEnPila = pila.getNeuronaFinal();
+            Neurona actual = grafoGlobal.buscarNeurona(nodoEnPila.getId());
+            pila.deleteFinal();
             
-            if (destino == null && pila.getNeuronaFinal() != null) {
-                origen = grafoGlobal.buscarNeurona(pila.getNeuronaFinal().getId());
-                destino = origen.getConexiones().getPrimeraSinapsis();
+            if (actual.getActivo() == false) {
+                actual.setActivo(true);
+                dfs.insertFinal(actual);
                 
-                if (origen.getActivo() == false) {
-                    dfs.insertFinal(origen);
-                    origen.setActivo(true);
+                Sinapsis sinapsis = actual.getConexiones().getPrimeraSinapsis();
+                while (sinapsis != null) {
+                    Neurona vecino = grafoGlobal.buscarNeurona(sinapsis.getDestino().getId());
+                    if (vecino.getActivo() == false) {
+                        pila.insertFinal(vecino);
+                    }
+                    sinapsis = sinapsis.getSiguiente();
                 }
-                
-                pila.deleteFinal();
             }
         }
+        
         return dfs;  
     }
 
