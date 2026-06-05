@@ -207,62 +207,32 @@ public class GrafoSinaptico {
         }
     }
     
-    public String mostrarListaNeuronas() {
-        if (isEmpty() == true) {
-            return "No hay neuronas registradas en la red en este momento.\n";
-        }
-
-        String lista = "";
-        lista += "--- NEURONAS EN LA RED ---\n\n";
+    
+    public Sinapsis buscarSinapsis(String idOrigen, String idDestino) {
+        Neurona origen = buscarNeurona(idOrigen);
         
-        Neurona actual = neuronaInicio;
-        int contador = 0;
-
-        while (actual != null) {
-            lista += "Neurona ID: " + actual.getId() + "\n";
-            contador++;
-            actual = actual.getSiguiente();
+        if (origen == null || origen.getConexiones().isEmpty() == true) {
+            return null;
         }
 
-        if (contador == 0) {
-            return "Todas las neuronas han sido eliminadas de la red.\n";
-        }
-
-        return lista;
-    }
-
-    public String mostrarListaSinapsis() {
-        if (isEmpty() == true) {
-            return "No hay sinapsis porque la red está vacía.\n";
-        }
-
-        String lista = "";
-        lista += "--- CONEXIONES SINÁPTICAS ---\n\n";
+        Sinapsis actual = origen.getConexiones().getPrimeraSinapsis();
         
-        Neurona actual = neuronaInicio;
-        boolean haySinapsis = false;
-
+        
         while (actual != null) {
-            
-            Sinapsis sinapsisActual = actual.getConexiones().getPrimeraSinapsis();
-                
-            while (sinapsisActual != null) {
-                    
-                Neurona destino = sinapsisActual.getDestino();
-                    
-                lista += "Origen: "  + actual.getId() +  " ->  " + "Destino: " + destino.getId()  + " / Químico: " + sinapsisActual.getIdNeurotransmisor() +" / d: " + sinapsisActual.getDistancia() + "\n";
-                        
-                haySinapsis = true;
-                sinapsisActual = sinapsisActual.getSiguiente();
+            if (actual.getDestino().getId().equals(idDestino)) {
+                return actual; 
             }
-            
             actual = actual.getSiguiente();
         }
-
-        if (haySinapsis == false) {
-            return "No existen conexiones activas entre las neuronas.\n";
-        }
-
-        return lista;
+        
+        return null;
     }
+
+    public boolean existeSinapsis(String idOrigen, String idDestino) {
+        if (buscarSinapsis(idOrigen, idDestino) != null) {
+            return true;
+        }
+        return false;
+    }
+
 }

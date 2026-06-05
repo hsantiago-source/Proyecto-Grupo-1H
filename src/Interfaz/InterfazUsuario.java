@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import EDD.GrafoSinaptico;
+import EDD.TablaHashNeurotransmisores;
 import Entidades.Neurona;
 import Entidades.Sinapsis;
 import Logica.ControladorPrincipal;
@@ -31,8 +32,6 @@ public class InterfazUsuario extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InterfazUsuario.class.getName());
 
-    private boolean redCargadaEnMemoria = false;
-    private boolean diccionarioCargadoEnMemoria = false;
     /**
      * Creates new form Interfaz
      */
@@ -66,6 +65,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
         RedGrafo = new javax.swing.JButton();
         SimulacionDijkstra = new javax.swing.JButton();
         dfsybfs = new javax.swing.JButton();
+        Neurotransmisor = new javax.swing.JButton();
         PanelContenedor = new javax.swing.JPanel();
         VistaCargaCSV = new javax.swing.JPanel();
         BotonDatosRed = new javax.swing.JButton();
@@ -82,6 +82,22 @@ public class InterfazUsuario extends javax.swing.JFrame {
         EliminarNeurona = new javax.swing.JButton();
         AgregarNeurona = new javax.swing.JButton();
         VistaSinapsis = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        AgregarSinapsis = new javax.swing.JButton();
+        EliminarSinapsis = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TextAreaSinapsis = new javax.swing.JTextArea();
+        IdDestino = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        IdOrigen1 = new javax.swing.JTextField();
+        CoeficienteK = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        Distancia = new javax.swing.JTextField();
+        Neurotransmisor1 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
         VistaVerRed = new javax.swing.JPanel();
         muestraGrafo = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -111,18 +127,22 @@ public class InterfazUsuario extends javax.swing.JFrame {
 
         Sinapsis.setText("Edición Sinapsis");
         Sinapsis.addActionListener(this::SinapsisActionPerformed);
-        Sidebar.add(Sinapsis, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 193, 167, -1));
+        Sidebar.add(Sinapsis, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 170, -1));
 
         RedGrafo.setText("Ver Red Neuronal");
         RedGrafo.addActionListener(this::RedGrafoActionPerformed);
-        Sidebar.add(RedGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 270, 167, -1));
+        Sidebar.add(RedGrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 167, -1));
 
         SimulacionDijkstra.setText("Simulación Dijkstra");
         SimulacionDijkstra.addActionListener(this::SimulacionDijkstraActionPerformed);
-        Sidebar.add(SimulacionDijkstra, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 345, 167, -1));
+        Sidebar.add(SimulacionDijkstra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 167, -1));
 
         dfsybfs.setText("Simulación DFS y BFS");
-        Sidebar.add(dfsybfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 429, 167, -1));
+        Sidebar.add(dfsybfs, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 167, -1));
+
+        Neurotransmisor.setText("Edición Neurotrans.");
+        Neurotransmisor.addActionListener(this::NeurotransmisorActionPerformed);
+        Sidebar.add(Neurotransmisor, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 170, -1));
 
         getContentPane().add(Sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 510));
 
@@ -169,7 +189,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
         VistaNeurona.add(NeuronaScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 560, 280));
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        jLabel4.setText("Insete el ID de la Neurona que desea Crear o Eliminar");
+        jLabel4.setText("Insete el ID de la Neurona que desea Agregar o Eliminar");
         VistaNeurona.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
 
         IdNeurona.addActionListener(this::IdNeuronaActionPerformed);
@@ -177,16 +197,74 @@ public class InterfazUsuario extends javax.swing.JFrame {
 
         EliminarNeurona.setText("Eliminar Neurona");
         EliminarNeurona.addActionListener(this::EliminarNeuronaActionPerformed);
-        VistaNeurona.add(EliminarNeurona, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 150, 40));
+        VistaNeurona.add(EliminarNeurona, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 150, 40));
 
         AgregarNeurona.setText("Agregar Neurona");
         AgregarNeurona.addActionListener(this::AgregarNeuronaActionPerformed);
-        VistaNeurona.add(AgregarNeurona, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 150, 40));
+        VistaNeurona.add(AgregarNeurona, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 150, 40));
 
         PanelContenedor.add(VistaNeurona, "card6");
 
         VistaSinapsis.setBackground(new java.awt.Color(245, 245, 245));
         VistaSinapsis.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel6.setText("ID Destino");
+        VistaSinapsis.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        AgregarSinapsis.setText("Agregar Sinapsis");
+        AgregarSinapsis.addActionListener(this::AgregarSinapsisActionPerformed);
+        VistaSinapsis.add(AgregarSinapsis, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 150, 40));
+
+        EliminarSinapsis.setText("Eliminar Sinapsis");
+        EliminarSinapsis.addActionListener(this::EliminarSinapsisActionPerformed);
+        VistaSinapsis.add(EliminarSinapsis, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 150, 40));
+
+        TextAreaSinapsis.setColumns(20);
+        TextAreaSinapsis.setRows(5);
+        jScrollPane1.setViewportView(TextAreaSinapsis);
+
+        VistaSinapsis.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 580, 200));
+
+        IdDestino.addActionListener(this::IdDestinoActionPerformed);
+        VistaSinapsis.add(IdDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 160, 30));
+
+        jLabel7.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel7.setText("Obligatorio para Agregar no para Eliminar");
+        VistaSinapsis.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel8.setText("ID Origen");
+        VistaSinapsis.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+
+        IdOrigen1.addActionListener(this::IdOrigen1ActionPerformed);
+        VistaSinapsis.add(IdOrigen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 160, 30));
+
+        CoeficienteK.addActionListener(this::CoeficienteKActionPerformed);
+        VistaSinapsis.add(CoeficienteK, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 160, 30));
+
+        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel9.setText("Coef. K");
+        VistaSinapsis.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, 60, -1));
+
+        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel10.setText("Campos para Agregar o Eliminar Sinapsis");
+        VistaSinapsis.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel11.setText("Distancia");
+        VistaSinapsis.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, -1));
+
+        Distancia.addActionListener(this::DistanciaActionPerformed);
+        VistaSinapsis.add(Distancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 160, 30));
+
+        Neurotransmisor1.addActionListener(this::Neurotransmisor1ActionPerformed);
+        VistaSinapsis.add(Neurotransmisor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 160, 30));
+
+        jLabel12.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel12.setText("ID Neurotr.");
+        VistaSinapsis.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 80, -1));
+
         PanelContenedor.add(VistaSinapsis, "card3");
 
         VistaVerRed.setBackground(new java.awt.Color(245, 245, 245));
@@ -254,10 +332,11 @@ public class InterfazUsuario extends javax.swing.JFrame {
         PanelContenedor.repaint();
         PanelContenedor.revalidate(); 
         
+        ControladorPrincipal controlador = new ControladorPrincipal();
         GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
         
         if (grafoGlobal != null) {
-            TextAreaNeurona.setText(grafoGlobal.mostrarListaNeuronas());
+            TextAreaNeurona.setText(controlador.mostrarListaNeuronas());
         }   
       }//GEN-LAST:event_NeuronasActionPerformed
 
@@ -266,6 +345,8 @@ public class InterfazUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_SimulacionDijkstraActionPerformed
 
     private void BotonDatosRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDatosRedActionPerformed
+
+        boolean redCargadaEnMemoria = ControladorPrincipal.getRedCargadaEnMemoria();
 
         if (redCargadaEnMemoria) {
             JOptionPane.showMessageDialog(this, 
@@ -306,7 +387,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
                     AreaTextoRed.setText(contenidoCompleto);
 
                 
-                    redCargadaEnMemoria = true;
+                    ControladorPrincipal.setRedCargadaEnMemoria(true);
                 }
                 
             } catch (Exception ex) {
@@ -316,7 +397,11 @@ public class InterfazUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonDatosRedActionPerformed
 
     private void BotonDicNeuroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDicNeuroActionPerformed
-if (diccionarioCargadoEnMemoria) {
+        
+        boolean diccionario = ControladorPrincipal.getDiccionarioCargadoEnMemoria();
+
+
+        if (diccionario == true) {
             JOptionPane.showMessageDialog(this, 
                 "Alerta: Ya hay un diccionario de neurotransmisores cargado en memoria.\nRecuerda guardar tus datos actuales si hiciste modificaciones.", 
                 "Advertencia de Sobreescritura", 
@@ -354,7 +439,7 @@ if (diccionarioCargadoEnMemoria) {
                     
                     AreaTextoNeuro.setText(contenidoCompleto);
                     
-                    diccionarioCargadoEnMemoria = true;
+                    ControladorPrincipal.setDiccionarioCargadoEnMemoria(true);
                 }
                 
             } catch (Exception ex) {
@@ -432,7 +517,17 @@ if (diccionarioCargadoEnMemoria) {
     }//GEN-LAST:event_RedGrafoActionPerformed
 
     private void SinapsisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SinapsisActionPerformed
-        // TODO add your handling code here:
+        PanelContenedor.removeAll();
+        PanelContenedor.add(VistaSinapsis);
+        PanelContenedor.repaint();
+        PanelContenedor.revalidate();
+        
+        ControladorPrincipal controlador = new ControladorPrincipal();
+        GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
+        
+        if (grafoGlobal != null) {
+            TextAreaSinapsis.setText(controlador.mostrarListaSinapsis());
+        }
     }//GEN-LAST:event_SinapsisActionPerformed
 
     private void IdNeuronaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdNeuronaActionPerformed
@@ -448,6 +543,7 @@ if (diccionarioCargadoEnMemoria) {
             return;
         }
         
+        ControladorPrincipal controlador = new ControladorPrincipal();
         GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
         
         if (grafoGlobal.existeNeurona(idIngresado) == false) {
@@ -460,7 +556,7 @@ if (diccionarioCargadoEnMemoria) {
         IdNeurona.setText("");
         
         if (grafoGlobal != null) {
-            TextAreaNeurona.setText(grafoGlobal.mostrarListaNeuronas());
+            TextAreaNeurona.setText(controlador.mostrarListaNeuronas());
         }
     }//GEN-LAST:event_EliminarNeuronaActionPerformed
 
@@ -472,7 +568,7 @@ if (diccionarioCargadoEnMemoria) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID válido.", "Campo Vacío", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+        ControladorPrincipal controlador = new ControladorPrincipal();
         GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
         
         if (grafoGlobal.existeNeurona(idIngresado) == true) {
@@ -485,9 +581,124 @@ if (diccionarioCargadoEnMemoria) {
         IdNeurona.setText("");
         
         if (grafoGlobal != null) {
-            TextAreaNeurona.setText(grafoGlobal.mostrarListaNeuronas());
+            TextAreaNeurona.setText(controlador.mostrarListaNeuronas());
         }
     }//GEN-LAST:event_AgregarNeuronaActionPerformed
+
+    private void AgregarSinapsisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarSinapsisActionPerformed
+        
+        String origen = IdOrigen1.getText().trim();
+        String destino = IdDestino.getText().trim();
+        String distanciaStr = Distancia.getText().trim();
+        String quimico = Neurotransmisor1.getText().trim();
+        String kStr = CoeficienteK.getText().trim();
+        
+        if (origen.isEmpty() == true || destino.isEmpty() == true || distanciaStr.isEmpty() == true || quimico.isEmpty() == true || kStr.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "Por favor, llene todos los campos para crear la sinapsis.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        try {
+            double distancia = Double.parseDouble(distanciaStr);
+            double k = Double.parseDouble(kStr);
+            
+            if (distancia>1 || distancia <0) {
+                throw new Exception("La distancia debe ser un valor entre 0 y 1.");
+            }
+            
+            if (k>1 || k <0){
+                throw new Exception("El coeficiente K debe ser un valor entre 0 y 1.");
+            }   
+            
+            TablaHashNeurotransmisores tablaNeuro = ControladorPrincipal.getTablaHash();
+            if (tablaNeuro.buscar(quimico) == null) { 
+                throw new Exception("El neurotransmisor '" + quimico + "' no existe en el diccionario cargado.");
+            }
+            
+            ControladorPrincipal controlador = new ControladorPrincipal();
+            GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
+            
+            if (grafoGlobal.existeNeurona(origen) == true && grafoGlobal.existeNeurona(destino) == true) {
+                
+                String mensaje = grafoGlobal.agregarSinapsis(origen, destino, distancia, quimico, k);
+                JOptionPane.showMessageDialog(this, mensaje);
+                
+                IdOrigen1.setText("");
+                IdDestino.setText("");
+                Distancia.setText("");
+                Neurotransmisor1.setText("");
+                CoeficienteK.setText("");
+                
+                if (grafoGlobal != null) {
+                    TextAreaSinapsis.setText(controlador.mostrarListaSinapsis());
+                }
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "Error: La neurona de origen o la de destino no existen en la red.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de Formato", JOptionPane.ERROR_MESSAGE);
+        }
+           
+    }//GEN-LAST:event_AgregarSinapsisActionPerformed
+
+    private void EliminarSinapsisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarSinapsisActionPerformed
+String origen = IdOrigen1.getText().trim();
+        String destino = IdDestino.getText().trim();
+        
+        if (origen.isEmpty() == true || destino.isEmpty() == true) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese el ID Origen y el ID Destino para eliminar la conexión.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        ControladorPrincipal controlador = new ControladorPrincipal();
+        GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
+        
+        if (grafoGlobal.existeNeurona(origen) == true && grafoGlobal.existeNeurona(destino) == true) {
+            
+        if (grafoGlobal.existeSinapsis(origen, destino) == false) {
+                JOptionPane.showMessageDialog(this, "Aviso: No existe ninguna conexión directa entre '" + origen + "' y '" + destino + "'.", "No encontrada", JOptionPane.WARNING_MESSAGE);
+            } else {
+                grafoGlobal.eliminarSinapsis(origen, destino);
+                JOptionPane.showMessageDialog(this, "Se eliminó la conexión entre '" + origen + "' y '" + destino + "'.");
+            }
+            
+            IdOrigen1.setText("");
+            IdDestino.setText("");
+            
+            if (grafoGlobal != null) {
+                TextAreaSinapsis.setText(controlador.mostrarListaSinapsis());
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Error: La neurona de origen o la de destino no existen en la red.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_EliminarSinapsisActionPerformed
+
+    private void IdDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdDestinoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IdDestinoActionPerformed
+
+    private void IdOrigen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdOrigen1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IdOrigen1ActionPerformed
+
+    private void CoeficienteKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CoeficienteKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CoeficienteKActionPerformed
+
+    private void DistanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DistanciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DistanciaActionPerformed
+
+    private void Neurotransmisor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Neurotransmisor1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Neurotransmisor1ActionPerformed
+
+    private void NeurotransmisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NeurotransmisorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NeurotransmisorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -516,15 +727,23 @@ if (diccionarioCargadoEnMemoria) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarNeurona;
+    private javax.swing.JButton AgregarSinapsis;
     private javax.swing.JTextArea AreaTextoNeuro;
     private javax.swing.JTextArea AreaTextoRed;
     private javax.swing.JButton BotonDatosRed;
     private javax.swing.JButton BotonDicNeuro;
     private javax.swing.JButton CargaCSV;
+    private javax.swing.JTextField CoeficienteK;
+    private javax.swing.JTextField Distancia;
     private javax.swing.JButton EliminarNeurona;
+    private javax.swing.JButton EliminarSinapsis;
+    private javax.swing.JTextField IdDestino;
     private javax.swing.JTextField IdNeurona;
+    private javax.swing.JTextField IdOrigen1;
     private javax.swing.JScrollPane NeuronaScroll;
     private javax.swing.JButton Neuronas;
+    private javax.swing.JButton Neurotransmisor;
+    private javax.swing.JTextField Neurotransmisor1;
     private javax.swing.JPanel PanelContenedor;
     private javax.swing.JButton RedGrafo;
     private javax.swing.JScrollPane SalidaCSVdicNeuro;
@@ -533,6 +752,7 @@ if (diccionarioCargadoEnMemoria) {
     private javax.swing.JButton SimulacionDijkstra;
     private javax.swing.JButton Sinapsis;
     private javax.swing.JTextArea TextAreaNeurona;
+    private javax.swing.JTextArea TextAreaSinapsis;
     private javax.swing.JPanel VistaCargaCSV;
     private javax.swing.JPanel VistaDFSyBFS;
     private javax.swing.JPanel VistaDijkstra;
@@ -542,6 +762,9 @@ if (diccionarioCargadoEnMemoria) {
     private javax.swing.JPanel VistaVerRed;
     private javax.swing.JButton dfsybfs;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -549,6 +772,11 @@ if (diccionarioCargadoEnMemoria) {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel muestraGrafo;
     // End of variables declaration//GEN-END:variables
 }
