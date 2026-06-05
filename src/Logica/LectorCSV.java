@@ -8,12 +8,16 @@
     import javax.swing.JOptionPane;
 
     /**
-     *
-     * @author Gonzalo
-     */
+    * Clase encargada de leer y procesar archivos CSV para cargar los neurotransmisores.
+    * @author Gonzalo
+    */
     public class LectorCSV {
 
-
+    /**
+     * Lee un archivo CSV con la información de los neurotransmisores y los inserta en la tabla hash.
+     * @param rutaArchivo La ruta del archivo CSV con los datos de los químicos.
+     * @return true si el diccionario se cargó con éxito, false si ocurrió un error.
+     */
         public Boolean leerDiccionarioHash (String rutaArchivo) {
             TablaHashNeurotransmisores diccionario = ControladorPrincipal.getTablaHash(); 
 
@@ -48,6 +52,11 @@
         }
 
 
+     /**
+     * Lee un archivo CSV con las conexiones de la red sináptica, validando el factor k y creando los nodos.
+     * @param rutaArchivo La ruta del archivo CSV con las uniones entre neuronas.
+     * @return true si la red se estructuró correctamente, false si hubo fallas en la lectura o datos inválidos.
+     */
         public Boolean leerRedNeuronal(String rutaArchivo) {
             GrafoSinaptico grafo = ControladorPrincipal.getGrafo(); 
 

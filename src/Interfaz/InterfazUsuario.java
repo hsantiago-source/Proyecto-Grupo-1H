@@ -22,7 +22,7 @@ import org.graphstream.ui.view.Viewer;
 import org.graphstream.ui.swingViewer.ViewPanel;
 import java.io.PrintWriter;
 /**
- *
+ * Clase de la interfaz gráfica principal que gestiona las vistas.
  * @author gonzalo
  */
 public class InterfazUsuario extends javax.swing.JFrame {
@@ -30,7 +30,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(InterfazUsuario.class.getName());
 
     /**
-     * Creates new form Interfaz
+     * Constructor de la interfaz; inicializa los componentes, centra la ventana y carga la vista de inicio.
      */
     public InterfazUsuario() {
     
@@ -510,6 +510,9 @@ public class InterfazUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cambia el contenedor principal para mostrar la vista de carga de archivos CSV.
+     */
     private void CargaCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargaCSVActionPerformed
         PanelContenedor.removeAll();
         PanelContenedor.add(VistaCargaCSV);
@@ -517,6 +520,10 @@ public class InterfazUsuario extends javax.swing.JFrame {
         PanelContenedor.revalidate();    
     }//GEN-LAST:event_CargaCSVActionPerformed
 
+    
+    /**
+     * Cambia a la vista de neuronas 
+     */
     private void NeuronasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NeuronasActionPerformed
         PanelContenedor.removeAll();
         PanelContenedor.add(VistaNeurona);
@@ -531,6 +538,9 @@ public class InterfazUsuario extends javax.swing.JFrame {
         }   
       }//GEN-LAST:event_NeuronasActionPerformed
 
+    /**
+     * Prepara la vista de simulación por Dijkstra y dibuja el grafo base completo en su panel correspondiente.
+     */
     private void SimulacionDijkstraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimulacionDijkstraActionPerformed
         PanelContenedor.removeAll();
         PanelContenedor.add(VistaDijkstra);
@@ -583,6 +593,10 @@ public class InterfazUsuario extends javax.swing.JFrame {
         grafooriginal.revalidate();
     }//GEN-LAST:event_SimulacionDijkstraActionPerformed
 
+    
+    /**
+     * Abre un JFileChooser para seleccionar y procesar el archivo CSV que contiene la estructura de la red neuronal.
+     */
     private void BotonDatosRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDatosRedActionPerformed
        
 
@@ -640,6 +654,9 @@ public class InterfazUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotonDatosRedActionPerformed
 
+    /**
+     * Abre un JFileChooser para seleccionar e importar el archivo CSV con la lista de neurotransmisores.
+     */
     private void BotonDicNeuroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDicNeuroActionPerformed
         
 
@@ -698,6 +715,9 @@ public class InterfazUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotonDicNeuroActionPerformed
 
+    /**
+     * Muestra  la red en un grafo visual, filtrando solo los elementos activos.
+     */
     private void RedGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RedGrafoActionPerformed
         
         GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
@@ -766,6 +786,9 @@ public class InterfazUsuario extends javax.swing.JFrame {
         PanelContenedor.revalidate();
     }//GEN-LAST:event_RedGrafoActionPerformed
 
+    /**
+     * Cambia a la vista de sinapsis.
+     */
     private void SinapsisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SinapsisActionPerformed
         PanelContenedor.removeAll();
         PanelContenedor.add(VistaSinapsis);
@@ -784,6 +807,10 @@ public class InterfazUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_IdNeuronaActionPerformed
 
+    
+    /**
+     * Elimina de forma permanente una neurona del grafo.
+     */
     private void EliminarNeuronaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarNeuronaActionPerformed
     
     String idIngresado = IdNeurona.getText().trim();
@@ -810,6 +837,9 @@ public class InterfazUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_EliminarNeuronaActionPerformed
 
+    /**
+     * Agrega manualmente una nueva neurona aislada a la red.
+     */
     private void AgregarNeuronaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarNeuronaActionPerformed
     
     String idIngresado = IdNeurona.getText().trim();
@@ -835,6 +865,10 @@ public class InterfazUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_AgregarNeuronaActionPerformed
 
+    
+    /**
+     * Crea un enlace dirigido entre dos neuronas existentes.
+     */
     private void AgregarSinapsisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarSinapsisActionPerformed
         
         String origen = IdOrigen1.getText().trim();
@@ -893,8 +927,11 @@ public class InterfazUsuario extends javax.swing.JFrame {
            
     }//GEN-LAST:event_AgregarSinapsisActionPerformed
 
+    /**
+     * Elimina una sinapsis existente entre el nodo origen y destino dados.
+     */
     private void EliminarSinapsisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarSinapsisActionPerformed
-String origen = IdOrigen1.getText().trim();
+        String origen = IdOrigen1.getText().trim();
         String destino = IdDestino.getText().trim();
         
         if (origen.isEmpty() == true || destino.isEmpty() == true) {
@@ -945,7 +982,9 @@ String origen = IdOrigen1.getText().trim();
     private void Neurotransmisor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Neurotransmisor1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Neurotransmisor1ActionPerformed
-
+    /**
+     * Muestra la vista de edicion de neurotransmisores.
+     */
     private void NeurotransmisorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NeurotransmisorActionPerformed
         PanelContenedor.removeAll();
         PanelContenedor.add(VistaNeurotransmisor);
@@ -964,6 +1003,9 @@ String origen = IdOrigen1.getText().trim();
         // TODO add your handling code here:
     }//GEN-LAST:event_IdNeuronaDestinoActionPerformed
 
+    /**
+     * Llama al simulador de fatiga para alterar el coeficiente k global.
+     */
     private void simulacionfatigaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simulacionfatigaActionPerformed
         try {
             GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
@@ -995,6 +1037,9 @@ String origen = IdOrigen1.getText().trim();
         }
     }//GEN-LAST:event_simulacionfatigaActionPerformed
 
+    /**
+     * Ejecuta el algoritmo de Dijkstra para calcular el camino de menor tiempo y destaca visualmente la ruta en rojo.
+     */
     private void DijkstraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DijkstraActionPerformed
         String origen = IdNeuronaOrigen.getText().trim();
         String destino = IdNeuronaDestino.getText().trim();
@@ -1061,6 +1106,9 @@ String origen = IdOrigen1.getText().trim();
         // TODO add your handling code here:
     }//GEN-LAST:event_IdNeuronaFuenteActionPerformed
 
+    /**
+     * Ejecuta el análisis DFS desde el nodo fuente y colorea en verde los alcanzables y en rojo los aislados.
+     */
     private void DFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DFSActionPerformed
         
         String fuente = IdNeuronaFuente.getText().trim();
@@ -1135,6 +1183,10 @@ String origen = IdOrigen1.getText().trim();
         grafo.revalidate();
     }//GEN-LAST:event_DFSActionPerformed
 
+    
+    /**
+     * Ejecuta el análisis BFS partiendo de la neurona de origen, actualizando el grafo.
+     */
     private void BFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BFSActionPerformed
         
         String fuente = IdNeuronaFuente.getText().trim();
@@ -1208,6 +1260,9 @@ String origen = IdOrigen1.getText().trim();
         grafo.revalidate();
     }//GEN-LAST:event_BFSActionPerformed
 
+    /**
+     * Muestra la vista de DFS y BFS
+     */
     private void dfsybfsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dfsybfsActionPerformed
         PanelContenedor.removeAll();
         PanelContenedor.add(VistaDFSyBFS);
@@ -1262,6 +1317,9 @@ String origen = IdOrigen1.getText().trim();
         grafo.revalidate();
     }//GEN-LAST:event_dfsybfsActionPerformed
 
+    /**
+    * Registra un nuevo neurotransmisor en la tabla hash
+    */
     private void AgregarNeurotransActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarNeurotransActionPerformed
         String id = IdNeurotrans.getText().trim();
         String nombre = nombreneurotrans.getText().trim();
@@ -1316,6 +1374,9 @@ String origen = IdOrigen1.getText().trim();
 
     }//GEN-LAST:event_AgregarNeurotransActionPerformed
 
+    /**
+    * Elimina un neurotransmisor específico de la tabla hash utilizando su ID único.
+    */
     private void EliminarNeurotansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarNeurotansActionPerformed
         String id = IdNeurotrans.getText().trim();
 
@@ -1358,6 +1419,10 @@ String origen = IdOrigen1.getText().trim();
         // TODO add your handling code here:
     }//GEN-LAST:event_velocidadneurotransActionPerformed
 
+    /**
+    * Exporta el estado actual del diccionario de neurotransmisores 
+    * a un archivo en formato CSV a través de un JFileChooser.
+    */
     private void csvneuromodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_csvneuromodActionPerformed
 
         if (ControladorPrincipal.getDiccionarioCargadoEnMemoria() == false) {
@@ -1405,6 +1470,9 @@ String origen = IdOrigen1.getText().trim();
         }
     }//GEN-LAST:event_csvneuromodActionPerformed
 
+    /**
+    * Exporta la estructura de la red completa a un archivo estructurado CSV.
+    */
     private void csvredmodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_csvredmodActionPerformed
         if (ControladorPrincipal.getRedCargadaEnMemoria() == false) {
             JOptionPane.showMessageDialog(this, "No hay ninguna red neuronal cargada para guardar.", "Error", JOptionPane.ERROR_MESSAGE);
