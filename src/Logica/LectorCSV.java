@@ -36,9 +36,7 @@
 
                         Neurotransmisor quimico = new Neurotransmisor(id, nombre, efecto, velocidad, descripcion);
                         diccionario.insertar(quimico);
-                    } else {
-                        System.out.println("Línea ignorada por formato incorrecto"); 
-                    }
+                    } 
                 }
                 br.close();
                 JOptionPane.showMessageDialog(null, "Diccionario cargado exitosamente.");
@@ -70,6 +68,10 @@
                         double distancia = Double.parseDouble(datos[2].trim());
                         String idQuimico = datos[3].trim();
                         double k = Double.parseDouble(datos[4].trim());
+                        
+                        if (k <= 0 || k > 1) {
+                            throw new Exception("El factor k (Coeficiente de Eficiencia Sináptica) debe ser mayor a 0 y menor o igual a 1. Valor incorrecto (" + k + ") en la conexión " + idOrigen + " -> " + idDestino);
+                        }
 
                         if (!grafo.existeNeurona(idOrigen)) {
                             grafo.agregarNeurona(idOrigen);

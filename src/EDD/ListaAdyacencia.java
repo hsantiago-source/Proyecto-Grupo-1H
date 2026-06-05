@@ -7,28 +7,44 @@ import Entidades.Sinapsis;
  */
 public class ListaAdyacencia {
     
-    // Campos de la clase: representan el primer y ultimo enlace (Sinapsis) de la lista
     private Sinapsis primeraSinapsis;
     private Sinapsis ultimaSinapsis;
 
-    // Constructor de la clase
+    /**
+     * Constructor de la clase. Arranca la lista limpia y sin conexiones.
+     */    
     public ListaAdyacencia() {
         this.ultimaSinapsis = null;
     }
 
-    //Getters y setters 
+    /**
+     * Para sacar la primera sinapsis de la lista.
+     * @return La sinapsis del inicio.
+     */
     public Sinapsis getPrimeraSinapsis() {
         return primeraSinapsis;
     }
 
+    /**
+     * Para setear la primera sinapsis.
+     * @param primeraSinapsis La sinapsis inicial.
+     */
     public void setPrimeraSinapsis(Sinapsis primeraSinapsis) {
         this.primeraSinapsis = primeraSinapsis;
     }
 
+    /**
+     * Para ver cuál es la última sinapsis de la lista.
+     * @return La sinapsis del final.
+     */
     public Sinapsis getUltimaSinapsis() {
         return ultimaSinapsis;
     }
 
+    /**
+     * Para setear la sinapsis final.
+     * @param ultimaSinapsis La sinapsis que va para el final.
+     */
     public void setUltimaSinapsis(Sinapsis ultimaSinapsis) {
         this.ultimaSinapsis = ultimaSinapsis;
     }
