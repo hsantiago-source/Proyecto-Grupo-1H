@@ -9,11 +9,15 @@ import Entidades.Neurona;
 import Entidades.Sinapsis;
 
 /**
- *
+ * Esta clase se encarga de recorrer la red de neuronas usando algoritmos de búsqueda (BFS y DFS) para detectar cuáles zonas se quedaron aisladas.
  * @author andres
  */
 public class AnalizadorConectividad {
     
+    /**
+     * Pone el estado activo de todas las neuronas del grafo global en false. 
+     * Sirve para arrancar un nuevo recorrido.
+     */
     private void reiniciarEstados() {
         GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
         Neurona actual = grafoGlobal.getNeuronaInicio();
@@ -23,6 +27,11 @@ public class AnalizadorConectividad {
         }
     }
     
+    /**
+     * Realiza un recorrido BFS partiendo desde una neurona inicial.
+     * @param entrada El ID de la neurona de origen donde empieza la búsqueda.
+     * @return Un nuevo GrafoSinaptico con las neuronas alcanzadas en el orden del recorrido.
+     */
     public GrafoSinaptico BFS(String entrada) {
         GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
         GrafoSinaptico cola = new GrafoSinaptico();
@@ -61,6 +70,11 @@ public class AnalizadorConectividad {
         return bfs;  
     } 
 
+    /**
+     * Realiza un recorrido DFS arrancando desde una neurona inicial.
+     * @param entrada El ID de la neurona de origen donde empieza la búsqueda.
+     * @return Un nuevo GrafoSinaptico con las neuronas visitadas en el orden de profundidad.
+     */
     public GrafoSinaptico DFS(String entrada) {
         GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
         GrafoSinaptico pila = new GrafoSinaptico();
@@ -99,6 +113,10 @@ public class AnalizadorConectividad {
         return dfs;  
     }
 
+    /**
+     * Revisa el grafo global para identificar qué neuronas se quedaron inactivas ya que son las aisladas
+     * @return Un texto con los IDs de las neuronas aisladas,
+     */
     public String obtenerZonasAisladas() {
         GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
         String aisladas = "";
@@ -123,19 +141,4 @@ public class AnalizadorConectividad {
         }
     }
 
-    public boolean estaFragmentada() {
-        GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
-        if (grafoGlobal == null || grafoGlobal.isEmpty() == true) {
-            return false;
-        }
-
-        Neurona actual = grafoGlobal.getNeuronaInicio();
-        while (actual != null) {
-            if (actual.getActivo()== false) {
-                return true;
-            } 
-            actual = actual.getSiguiente();
-        }
-        return false; 
-    }
 }

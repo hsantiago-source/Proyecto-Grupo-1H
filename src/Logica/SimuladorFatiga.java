@@ -9,11 +9,14 @@ import Entidades.Neurona;
 import Entidades.Sinapsis;
 
 /**
- *
+ * Clase encargada de simular la fatiga incrementando el factor k de todas las sinapsis.
  * @author andres
  */
 public class SimuladorFatiga {
     
+    /**
+     * Recorre todas las neuronas y sus conexiones para aumentar su factor k por 1.2.
+     */
     public void aplicarFatiga() {
         GrafoSinaptico grafo = ControladorPrincipal.getGrafo();
         
