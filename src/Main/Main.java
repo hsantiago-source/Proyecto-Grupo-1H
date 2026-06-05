@@ -4,6 +4,8 @@
  */
 package Main;
 
+import Interfaz.InterfazUsuario;
+
 /**
  * Main inicio del programa
  * @author hsantiago
@@ -14,7 +16,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        InterfazUsuario ventana = new InterfazUsuario();
+        ventana.setVisible(true);
     }
     
 }

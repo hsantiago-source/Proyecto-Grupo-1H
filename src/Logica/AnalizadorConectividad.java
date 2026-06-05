@@ -25,8 +25,8 @@ public class AnalizadorConectividad {
     
     public GrafoSinaptico BFS(String entrada) {
         GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
-        GrafoSinaptico cola = new GrafoSinaptico(null, null);
-        GrafoSinaptico bfs = new GrafoSinaptico(null, null);
+        GrafoSinaptico cola = new GrafoSinaptico();
+        GrafoSinaptico bfs = new GrafoSinaptico();
         
         reiniciarEstados();
 
@@ -62,8 +62,8 @@ public class AnalizadorConectividad {
 
     public GrafoSinaptico DFS(String entrada) {
         GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
-        GrafoSinaptico pila = new GrafoSinaptico(null, null);
-        GrafoSinaptico dfs = new GrafoSinaptico(null, null);
+        GrafoSinaptico pila = new GrafoSinaptico();
+        GrafoSinaptico dfs = new GrafoSinaptico();
         
         reiniciarEstados();
         
@@ -125,7 +125,7 @@ public class AnalizadorConectividad {
 
     public boolean estaFragmentada() {
         GrafoSinaptico grafoGlobal = ControladorPrincipal.getGrafo();
-        if (grafoGlobal == null || grafoGlobal.isEmpty()) {
+        if (grafoGlobal == null || grafoGlobal.isEmpty() == true) {
             return false;
         }
 

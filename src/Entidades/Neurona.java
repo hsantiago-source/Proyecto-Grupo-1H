@@ -22,12 +22,12 @@ public class Neurona {
     private double dPesoFijo;
     private Boolean dVisitado;
 
-    public Neurona(String id, Boolean activo, Neurona siguiente, ListaAdyacencia conexiones) {
+    public Neurona(String id) {
         this.id = id;
-        this.activo = activo;
+        this.activo = true;
         this.siguiente = null;
-        this.conexiones = conexiones;
-        this.dPesoAcumulado = 0;
+        this.conexiones = new ListaAdyacencia();
+        this.dPesoAcumulado = Double.MAX_VALUE;
         this.dNeuronaAnterior = null;
         this.dPesoFijo = 0;
         this.dVisitado = null; 

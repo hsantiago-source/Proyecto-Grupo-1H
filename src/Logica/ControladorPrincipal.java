@@ -13,7 +13,7 @@ import EDD.TablaHashNeurotransmisores;
  */
 public class ControladorPrincipal {
     
-    private static GrafoSinaptico grafo = new GrafoSinaptico(null,null); 
+    private static GrafoSinaptico grafo = new GrafoSinaptico(); 
     
     private static TablaHashNeurotransmisores tablaHash = new TablaHashNeurotransmisores(101);
 

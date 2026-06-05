@@ -15,9 +15,9 @@ public class GrafoSinaptico {
     private Neurona neuronaInicio;
     private Neurona neuronaFinal;
 
-    public GrafoSinaptico(Neurona neuronaInicio, Neurona neuronaFinal) {
-        this.neuronaInicio = neuronaInicio;
-        this.neuronaFinal = neuronaFinal;
+    public GrafoSinaptico() {
+        this.neuronaInicio = null;
+        this.neuronaFinal = null;
     }
 
     public Neurona getNeuronaInicio() {
@@ -39,15 +39,21 @@ public class GrafoSinaptico {
 
 
     public boolean isEmpty(){
-        return neuronaInicio == null;
+        if(neuronaInicio == null){
+            return true;
+        }
+        return false;
     }
     
     public boolean existeNeurona(String id){
-        return buscarNeurona(id) != null;
+        if (buscarNeurona(id) != null){
+            return true;
+        }
+        return false;
     }
     
     public Neurona buscarNeurona(String id){
-        if(isEmpty()){
+        if(isEmpty() == true){
             return null;
         } else{
             Neurona actual = neuronaInicio;
@@ -61,11 +67,10 @@ public class GrafoSinaptico {
     }
     
     public void agregarNeurona(String id){
-        if (!existeNeurona(id)){
-            ListaAdyacencia nuevasConexiones = new ListaAdyacencia();
-            Neurona nuevaNeurona = new Neurona(id, true, null, nuevasConexiones);
+        if (existeNeurona(id) == false){
+            Neurona nuevaNeurona = new Neurona(id);
             
-            if (isEmpty()){
+            if (isEmpty() == true){
                 neuronaInicio = nuevaNeurona;
                 neuronaFinal = nuevaNeurona;
             } else{
@@ -82,10 +87,10 @@ public class GrafoSinaptico {
         if (origen != null && destino != null) {
                 ListaAdyacencia listaOrigen = origen.getConexiones();
 
-                if (!listaOrigen.existeAdyacencia(idDestino)) {
+                if (listaOrigen.existeAdyacencia(idDestino) == false) {
                     Sinapsis nuevaSinapsis = new Sinapsis(destino, distancia, idNeurotransmisor, k);
 
-                    if (listaOrigen.isEmpty()) {
+                    if (listaOrigen.isEmpty() == true) {
                         listaOrigen.setPrimeraSinapsis(nuevaSinapsis);
                         listaOrigen.setUltimaSinapsis(nuevaSinapsis);
                     } else {
@@ -100,7 +105,9 @@ public class GrafoSinaptico {
     }   
     
     public void eliminarNeurona(String id) {
-        if (isEmpty() || existeNeurona(id) == false) return;
+        if (isEmpty() == true || existeNeurona(id) == false) {
+            return;
+        }
 
         if (neuronaInicio.getId().equals(id)) {
             neuronaInicio = neuronaInicio.getSiguiente();
@@ -128,8 +135,9 @@ public class GrafoSinaptico {
     
     public void eliminarSinapsis(String idOrigen, String idDestino) {
         Neurona origen = buscarNeurona(idOrigen);
-        if (origen == null || origen.getConexiones().isEmpty())
-            return;
+        if (origen == null || origen.getConexiones().isEmpty()){
+           return;
+        }
 
         ListaAdyacencia lista = origen.getConexiones();
         Sinapsis actual = lista.getPrimeraSinapsis();
@@ -155,10 +163,9 @@ public class GrafoSinaptico {
 
     //ENCOLAR o APILAR
     public void insertFinal(Neurona dato) {
-        ListaAdyacencia vacia = new ListaAdyacencia();
-        Neurona clon = new Neurona(dato.getId(), dato.getActivo(), null, vacia);
+        Neurona clon = new Neurona(dato.getId());
         
-        if (isEmpty()) {
+        if (isEmpty() == true) {
             neuronaInicio = clon;
             neuronaFinal = clon;
         } else {
@@ -169,7 +176,7 @@ public class GrafoSinaptico {
 
     // DESENCOLAR 
     public void deleteBegin() {
-        if (!isEmpty()) {
+        if (!isEmpty() == true) {
             Neurona extraida = neuronaInicio;
             neuronaInicio = neuronaInicio.getSiguiente();
             
@@ -182,7 +189,9 @@ public class GrafoSinaptico {
 
     // DESAPILAR
     public void deleteFinal() {
-        if (isEmpty()) return;
+        if (isEmpty() == true){
+            return;
+        }
 
         if (neuronaInicio == neuronaFinal) {
             neuronaInicio = null;
@@ -196,5 +205,64 @@ public class GrafoSinaptico {
             actual.setSiguiente(null); 
             neuronaFinal = actual;     
         }
+    }
+    
+    public String mostrarListaNeuronas() {
+        if (isEmpty() == true) {
+            return "No hay neuronas registradas en la red en este momento.\n";
+        }
+
+        String lista = "";
+        lista += "--- NEURONAS EN LA RED ---\n\n";
+        
+        Neurona actual = neuronaInicio;
+        int contador = 0;
+
+        while (actual != null) {
+            lista += "Neurona ID: " + actual.getId() + "\n";
+            contador++;
+            actual = actual.getSiguiente();
+        }
+
+        if (contador == 0) {
+            return "Todas las neuronas han sido eliminadas de la red.\n";
+        }
+
+        return lista;
+    }
+
+    public String mostrarListaSinapsis() {
+        if (isEmpty() == true) {
+            return "No hay sinapsis porque la red está vacía.\n";
+        }
+
+        String lista = "";
+        lista += "--- CONEXIONES SINÁPTICAS ---\n\n";
+        
+        Neurona actual = neuronaInicio;
+        boolean haySinapsis = false;
+
+        while (actual != null) {
+            
+            Sinapsis sinapsisActual = actual.getConexiones().getPrimeraSinapsis();
+                
+            while (sinapsisActual != null) {
+                    
+                Neurona destino = sinapsisActual.getDestino();
+                    
+                lista += "Origen: "  + actual.getId() +  " ->  " + "Destino: " + destino.getId()  + " / Químico: " + sinapsisActual.getIdNeurotransmisor() +" / d: " + sinapsisActual.getDistancia() + "\n";
+                        
+                haySinapsis = true;
+                sinapsisActual = sinapsisActual.getSiguiente();
+            }
+            
+            actual = actual.getSiguiente();
+        }
+
+        if (haySinapsis == false) {
+            return "No existen conexiones activas entre las neuronas.\n";
+        }
+
+        return lista;
     }
 }

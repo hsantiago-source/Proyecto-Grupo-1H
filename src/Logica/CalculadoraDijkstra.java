@@ -92,7 +92,7 @@ public class CalculadoraDijkstra {
     }
 
     private GrafoSinaptico reconstruirRuta(String idOrigen, String idDestino) {
-        GrafoSinaptico ruta = new GrafoSinaptico(null, null);
+        GrafoSinaptico ruta = new GrafoSinaptico();
         Neurona actual = ControladorPrincipal.getGrafo().buscarNeurona(idDestino);
         
         while (actual != null) {
